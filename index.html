@@ -1,0 +1,105 @@
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        td {
+            border: 1px solid navy;
+            width: 100px;
+            height: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        #box {
+            margin: auto;
+            text-align: center;
+            width: 87px;
+            height: 35px;
+            line-height: 35px;
+            border: 2px solid SteelBlue;
+            background-color: white;
+            cursor: move;
+     
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td class="dragzone"></td>
+            <td class="dragzone"></td>
+            <td class="dragzone"></td>
+        </tr>
+        <tr>
+            <td class="dragzone" id="one">
+                <div id="box">Hello World!</div>
+            </td>
+            <td class="dragzone" id="two"></td>
+            <td class="dragzone"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        window.onload = function () {
+            let box = document.getElementById('box')
+            let offsetX = box.offsetWidth / 2
+            let offsetY = box.offsetHeight / 2
+            let curCell
+            box.addEventListener('mousedown', (e) => {
+                curCell = getCurrentCell(e)
+                document.addEventListener('mousemove', moveHandler)
+            })
+            box.addEventListener('mouseup', (e) => {
+                let el = getCurrentCell(e)
+                el.style.background = ''
+                moveToCurCell()
+                document.removeEventListener('mousemove', moveHandler)
+            })
+            function moveHandler(e) {
+                let el = getCurrentCell(e)
+                if(el !== curCell) {
+                    curCell.style.background = ''
+                    curCell = el
+                    curCell.style.background = 'rgb(231,171,171)'
+                }
+                moveTo(e.clientX, e.clientY) 
+            }
+            function getCurrentCell(e) {
+                box.hidden = true
+                let el = document.elementFromPoint(e.clientX, e.clientY)
+                box.hidden = false
+                return el
+            }
+            function moveToCurCell(e) {
+                let rec = curCell.getBoundingClientRect()
+                let x = rec.x + rec.width/2
+                let y = rec.y + rec.height/2
+                moveTo(x,y)
+            }
+            function moveTo(x, y) {
+                box.style.position = 'absolute'
+                box.style.left = x - offsetX
+                box.style.top = y - offsetY
+            }
+
+        }
+    </script>
+</body>
+
+</html>
