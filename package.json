@@ -1,0 +1,26 @@
+{
+  "name": "dragbletable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "parcel tab1/tab1.html -p 3000 --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-joker/dragbletable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j-joker/dragbletable/issues"
+  },
+  "homepage": "https://github.com/j-joker/dragbletable#readme",
+  "dependencies": {
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
